@@ -1,0 +1,21 @@
+
+  @font-face {
+    font-family: absender;
+    src: url("/assets/fonts/absender.ttf");
+  }
+
+.navbar{
+    background-color: #037971;
+    color: white;
+}
+
+.title{
+font-family: absender;
+src: url("/assets/fonts/absender.ttf");
+font-size: 4.5em;
+}
+
+.navbar .navbar-expand-lg{
+
+color:white;
+}
