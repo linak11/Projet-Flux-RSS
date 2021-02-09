@@ -1,15 +1,15 @@
 
   @font-face {
     font-family: absender;
-    src: url("/assets/fonts/absender.ttf");
+    src: url("assets/fonts/absender.ttf");
   }
   @font-face {
     font-family:Champagne;
-    src: url("/assets/fonts/Champagne.ttf");
+    src: url("assets/fonts/Champagne.ttf");
   }
   body{
     font-family: Champagne;
-    src: url("/assets/fonts/Champagne.ttf");
+    src: url("assets/fonts/Champagne.ttf");
     color:#023436;
    
   }
@@ -24,14 +24,14 @@
 }
 .brand{
   font-family: absender;
-  src: url("/assets/fonts/absender.ttf");
+  src: url("assets/fonts/absender.ttf");
   font-size: 2em;
   color:#037971;
 }
 
 .title{
 font-family: absender;
-src: url("/assets/fonts/absender.ttf");
+src: url("assets/fonts/absender.ttf");
 font-size: 4.5em;
 color:#037971;
 }
