@@ -94,6 +94,7 @@ function allItems()
   $content = simplexml_load_file($feed);
   foreach ($content->channel->item as $item) {
     $title = $item->title;
+    setcookie("title", $title, time()+3600); 
     $image = $item->enclosure['url'];
     $url = $item->link;
     $PubDate = $item->pubDate;
@@ -106,31 +107,19 @@ function allItems()
   }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fids</title>
-</head>
-
-<body>
-  <!-- Boutons premier feed -->
-  <form action="index.php" method="POST">
+  <!-- Boutons premier feed
+  <form action="index_controller.php" method="POST">
     <input type="submit" name="fiveItems" value="5 items" />
     <input type="submit" name="tenItems" value="10 items" />
     <input type="submit" name="unlItems" value="Toutes les Items" />
-  </form>
-
- <!-- Boutons choix de feed -->
-  <form action="index.php" method="POST">
+  </form> -->
+ <!-- Boutons choix de feed
+  <form action="index_controller.php" method="POST">
     <input type="submit" name="actu" value="Actualités"  />
     <input type="submit" name="techno" value="Technologies"  />
     <input type="submit" name="buzz" value="Buzz Société"  />
     <input type="submit" name="jeux" value="Jeux Vidéos"  />
     <input type="submit" name="politics" value="Politiques" />
   </form>
-
 </body>
-</html>
+</html> -->
