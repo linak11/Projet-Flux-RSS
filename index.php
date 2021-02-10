@@ -97,27 +97,27 @@ require "controllers/index_controller.php";
         <div id="newscard" class="card cardstyle">
           <div class="card-body">
             <h5 class="card-title"><b><?= $rss->channel->item[$i]->title ?></b></h5>
-            <p class="card-title"><b><?= $rss->channel->pubDate ?></b></p>
-            <p class="card-text"><?= strip_tags($rss->channel->description) ?></p>
+            <p class="card-title"><b><?= $rss->channel->item[$i]->pubDate ?></b></p>
+            <p class="card-text"><?= strip_tags($rss->channel->item[$i]->description) ?></p>
 
-            <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop-<?=$i?>">
               + de détails
             </button>
 
             <!-- Modal -->
-            <div class="modal fade modalstyle" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade modalstyle" id="staticBackdrop-<?=$i?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel"><?= $rss[$i]->channel->item[$i]->title ?></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <p class="card-title mx-3"><b><?= $rss->channel->pubDate ?></b></p>
+                  <p class="card-title mx-3"><b><?= $rss->channel->item[$i]->pubDate ?></b></p>
 
                   <div class="modal-body">
-                    <?= strip_tags(strip_tags($rss->channel->description)) ?>
+                    <?= strip_tags(strip_tags($rss->channel->$item[$i]->description)) ?>
                     <img class="img-fluid" src=<?= $rss->channel->item[$i]->enclosure['url'] ?> />
-                    <a href=<?= $rss->channel->item->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
+                    <a href=<?= $rss->channel->item[$i]->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
 
                   </div>
                   <div class="modal-footer">
