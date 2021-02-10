@@ -1,5 +1,4 @@
 <?php
-session_start();
 require "controllers/index_controller.php";
 ?>
 <!DOCTYPE html>
@@ -12,7 +11,7 @@ require "controllers/index_controller.php";
   <title>FIDZ</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
 
@@ -64,12 +63,12 @@ require "controllers/index_controller.php";
           <p class="card-title"><b><?= $_COOKIE["pubdate"] ?></b></p>
           <p class="card-text"><?= $_COOKIE["smalldesc"] . "..." ?></p>
 
-          <button type="button" class="btn btn-primary details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             + de détails
           </button>
 
           <!-- Modal -->
-          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal fade modalstyle" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -80,10 +79,12 @@ require "controllers/index_controller.php";
 
                 <div class="modal-body">
                   <?= $_COOKIE["desc"] ?>
-                  <img src=<?= $_COOKIE["image"] ?> />
+                  <img class="img-fluid" src=<?= $_COOKIE["image"] ?> />
+                  <a href=<?= $_COOKIE["url"] ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
+                
                 </div>
                 <div class="modal-footer">
-                  <a href=<?= $_COOKIE["url"] ?> class="btn btn-primary m-4" target="_blank">Accéder à l'article</a>
+                  
                   <button type="button" class="btn btn-secondary retour" data-bs-dismiss="modal">Retour</button>
                 </div>
               </div>
@@ -92,19 +93,54 @@ require "controllers/index_controller.php";
         </div>
       </div>
     </div>
-    <div class="col-md-6 offset-md-3 settings">
 
     </div>
   </div>
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button class="btn btn-primary me-md-2" type="button">Paramètres</button>
+  <div class="row">
+  <div class="col-sm-2">
+    <div class="card cardstyle">
+      <div class="card-body img-fluid actu">
+      <a href="#" class="linksubject"><p class="card-title">Actualités</p></a>
+      </div>
+    </div>
   </div>
+  <div class="col-sm-2">
+    <div class="card cardstyle">
+      <div class="card-body techno">
+      <a href="#" class="linksubject"><p class="card-title">Technologie</p></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="card cardstyle">
+      <div class="card-body img-fluid societe">
+      <a href="#" class="linksubject"><p class="card-title">Buzz & Société</p></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="card cardstyle">
+      <div class="card-body img-fluid jeux">
+      <a href="#" class="linksubject"><p class="card-title">Jeux</p></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="card cardstyle">
+      <div class="card-body img-fluid politique">
+        <a href="#" class="linksubject" type="btn"><p class="card-title">Politique et Droits</p></a>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 
 <footer>
-  <a href="" class="mentions">Mentions Légales</a>
+  <a href="mentions.html" class="mentions text-white">Mentions Légales</a>
 </footer>
 
 </html>

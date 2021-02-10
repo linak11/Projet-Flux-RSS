@@ -1,15 +1,15 @@
 
   @font-face {
     font-family: absender;
-    src: url("assets/fonts/absender.ttf");
+    src: url("/assets/fonts/absender.ttf");
   }
   @font-face {
     font-family:Champagne;
-    src: url("assets/fonts/Champagne.ttf");
+    src: url("/assets/fonts/Champagne.ttf");
   }
   body{
     font-family: Champagne;
-    src: url("assets/fonts/Champagne.ttf");
+    src: url("/assets/fonts/Champagne.ttf");
     color:#023436;
    
   }
@@ -24,14 +24,14 @@
 }
 .brand{
   font-family: absender;
-  src: url("assets/fonts/absender.ttf");
+  src: url("/assets/fonts/absender.ttf");
   font-size: 2em;
   color:#037971;
 }
 
 .title{
 font-family: absender;
-src: url("assets/fonts/absender.ttf");
+src: url("/assets/fonts/absender.ttf");
 font-size: 4.5em;
 color:#037971;
 }
@@ -80,14 +80,45 @@ a:hover{
   box-shadow: 0 2px 5px 0 black;
 }
 
-.details, .retour{
-  background-color: #ef9b0f;
-  border: 2px solid #037971;
-}
-.details:hover{
+.details, .retour, .article{
   background-color: #037971;
+  box-shadow: 0 6px 6px 0 #424242;
   color:white;
+  font-weight: bold;
 }
-.settings{
-  background-color: #023436;
+.details:hover, .article:hover, .retour:hover{
+  background-color:white;
+  color:#037971;
+}
+
+.linksubject{
+  text-decoration:underline;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #023436;
+}
+.linksubject:hover{
+  background-color: transparent;
+  color: white;
+
+}
+
+footer{
+  height: 10em;
+  background-color:#424242;
+}
+.mentions1{
+  font-family: Champagne;
+  src: url("/assets/fonts/Champagne.ttf");
+  font-weight: bold;
+  text-decoration: none;
+}
+.btn3{
+  border: 4px solid #037971;
+  box-shadow: 0 6px 6px 0 #424242;
+  font-size:1em;
+  font-weight: bold;
+}
+.btn3:hover{
+  color:white;
 }
