@@ -1,5 +1,7 @@
 <?php
+session_start();
 require "controllers/index_controller.php";
+var_dump($_COOKIE['numb']);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,7 +13,7 @@ require "controllers/index_controller.php";
   <title>FIDZ</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
 
@@ -31,12 +33,18 @@ require "controllers/index_controller.php";
           </li>
           <li class="nav-item">
             <a class="nav-link" name="actu" href="#">Tweeter feeds</a>
-            <form action="index.php" method="POST">
+            <form action="index.php" method="post">
               <input type="submit" name="actu" value="actualites" />
               <input type="submit" name="techno" value="Technologies" />
               <input type="submit" name="buzz" value="Buzz Société" />
               <input type="submit" name="jeux" value="Jeux Vidéos" />
               <input type="submit" name="politics" value="Politiques" />
+              <select name="numb" id="numb">
+                <option value="10">10</option>
+                <option value="5">5</option>
+                <option value="all">all</option>
+              </select>
+              <input type="submit" name="reload" value="Valider" />
             </form>
           </li>
           <li class="nav-item">
@@ -51,40 +59,47 @@ require "controllers/index_controller.php";
       </div>
     </div>
   </nav>
-
   <div class="d-flex justify-content-center mt-2">
     <img src="assets/img/title.png" class="animate__animated animate__bounce " id="f" />
   </div>
   <div class="row">
     <div class="col-sm-4 my-3">
+        <!-- Pour 10 items-->
+    <?php
+    if(isset($_POST['numb']) && isset($_POST['reload'])){
+    setcookie('numb', $_POST['numb'], time() + 3600);
+    }
+    if($_COOKIE['numb']=="10"){
+    $NUMITEMS = 10;
+    $count = 0;
+    foreach ($rss->channel->item as $item) {
+  ?>
       <div class="card cardstyle">
         <div class="card-body">
-          <h5 class="card-title"><b><?= $_COOKIE["title"] ?></b></h5>
-          <p class="card-title"><b><?= $_COOKIE["pubdate"] ?></b></p>
-          <p class="card-text"><?= $_COOKIE["smalldesc"] . "..." ?></p>
+          <h5 class="card-title"><b><?= $item->title ?></b></h5>
+          <p class="card-title"><b><?= $item->pubDate ?></b></p>
+          <p class="card-text"><?= substr($item->description, 0, $max_length ) . "..." ?></p>
 
-          <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <button type="button" class="btn btn-primary details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             + de détails
           </button>
 
           <!-- Modal -->
-          <div class="modal fade modalstyle" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel"><?= $_COOKIE["title"] ?></h5>
+                  <h5 class="modal-title" id="staticBackdropLabel"><?= $item->title ?></h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <p class="card-title mx-3"><b><?= $_COOKIE["pubdate"] ?></b></p>
+                <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
 
                 <div class="modal-body">
-                  <?= $_COOKIE["desc"] ?>
-                  <img class="img-fluid" src=<?= $_COOKIE["image"] ?> />
-                  <a href=<?= $_COOKIE["url"] ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
-                
+                  <?= strip_tags($item->description) ?>
+                  <img src=<?= $item->enclosure['url'] ?> />
                 </div>
                 <div class="modal-footer">
-                  
+                  <a href=<?= $item->link ?> class="btn btn-primary m-4" target="_blank">Accéder à l'article</a>
                   <button type="button" class="btn btn-secondary retour" data-bs-dismiss="modal">Retour</button>
                 </div>
               </div>
@@ -92,55 +107,148 @@ require "controllers/index_controller.php";
           </div>
         </div>
       </div>
-    </div>
+      <?php if(++$count >= $NUMITEMS) break;}}?>
+       <!-- Pour 5 items        -->
+    <?php
+     if(isset($_POST['numb']) && isset($_POST['reload'])){
+      setcookie('numb', $_POST['numb'], time() + 3600);
+      }
+      if($_COOKIE['numb']=="5"){
+    $NUMITEMS = 5;
+    $count = 0;
+    foreach ($rss->channel->item as $item) {
+  ?>
+      <div class="card cardstyle">
+        <div class="card-body">
+          <h5 class="card-title"><b><?= $item->title ?></b></h5>
+          <p class="card-title"><b><?= $item->pubDate ?></b></p>
+          <p class="card-text"><?= substr($item->description, 0, $max_length ) . "..." ?></p>
 
-    </div>
-  </div>
-  <div class="row">
-  <div class="col-sm-2">
-    <div class="card cardstyle">
-      <div class="card-body img-fluid actu">
-      <a href="#" class="linksubject"><p class="card-title">Actualités</p></a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-2">
-    <div class="card cardstyle">
-      <div class="card-body techno">
-      <a href="#" class="linksubject"><p class="card-title">Technologie</p></a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-2">
-    <div class="card cardstyle">
-      <div class="card-body img-fluid societe">
-      <a href="#" class="linksubject"><p class="card-title">Buzz & Société</p></a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-2">
-    <div class="card cardstyle">
-      <div class="card-body img-fluid jeux">
-      <a href="#" class="linksubject"><p class="card-title">Jeux</p></a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-2">
-    <div class="card cardstyle">
-      <div class="card-body img-fluid politique">
-        <a href="#" class="linksubject" type="btn"><p class="card-title">Politique et Droits</p></a>
-      </div>
-    </div>
-  </div>
-  
-  </div>
+          <button type="button" class="btn btn-primary details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            + de détails
+          </button>
 
+          <!-- Modal -->
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel"><?= $item->title ?></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
+
+                <div class="modal-body">
+                  <?= strip_tags($item->description) ?>
+                  <img src=<?= $item->enclosure['url'] ?> />
+                </div>
+                <div class="modal-footer">
+                  <a href=<?= $item->link ?> class="btn btn-primary m-4" target="_blank">Accéder à l'article</a>
+                  <button type="button" class="btn btn-secondary retour" data-bs-dismiss="modal">Retour</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php if(++$count >= $NUMITEMS) break;}}?>
+          <!-- Pour tout items        -->
+    <?php
+      if(isset($_POST['numb']) && isset($_POST['reload'])){
+        setcookie('numb', $_POST['numb'], time() + 3600);
+        }
+        if($_COOKIE['numb']=="all"){
+    foreach ($rss->channel->item as $item){
+  ?>
+      <div class="card cardstyle">
+        <div class="card-body">
+          <h5 class="card-title"><b><?= $item->title ?></b></h5>
+          <p class="card-title"><b><?= $item->pubDate ?></b></p>
+          <p class="card-text"><?= substr($item->description, 0, $max_length ) . "..." ?></p>
+
+          <button type="button" class="btn btn-primary details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            + de détails
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel"><?= $item->title ?></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
+
+                <div class="modal-body">
+                  <?= strip_tags($item->description) ?>
+                  <img src=<?= $item->enclosure['url'] ?> />
+                </div>
+                <div class="modal-footer">
+                  <a href=<?= $item->link ?> class="btn btn-primary m-4" target="_blank">Accéder à l'article</a>
+                  <button type="button" class="btn btn-secondary retour" data-bs-dismiss="modal">Retour</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php }} ?>
+      
+    </div>
+    </div>
+  </div>
+   <!-- Pour tout items        -->
+   <?php
+   if(!isset($_COOKIE['feed'])){
+    $feed = 'https://www.01net.com/rss/info/flux-rss/flux-toutes-les-actualites/';
+    $rss = simplexml_load_file($feed);
+    foreach ($rss->channel->item as $item){
+  ?>
+      <div class="card cardstyle">
+        <div class="card-body">
+          <h5 class="card-title"><b><?= $item->title ?></b></h5>
+          <p class="card-title"><b><?= $item->pubDate ?></b></p>
+          <p class="card-text"><?= substr($item->description, 0, $max_length ) . "..." ?></p>
+
+          <button type="button" class="btn btn-primary details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            + de détails
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel"><?= $item->title ?></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
+
+                <div class="modal-body">
+                  <?= strip_tags($item->description) ?>
+                  <img src=<?= $item->enclosure['url'] ?> />
+                </div>
+                <div class="modal-footer">
+                  <a href=<?= $item->link ?> class="btn btn-primary m-4" target="_blank">Accéder à l'article</a>
+                  <button type="button" class="btn btn-secondary retour" data-bs-dismiss="modal">Retour</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php }} ?>
+      
+    </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 
 <footer>
-  <a href="mentions.html" class="mentions text-white">Mentions Légales</a>
+  <a href="" class="mentions">Mentions Légales</a>
 </footer>
 
 </html>
