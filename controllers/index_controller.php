@@ -38,7 +38,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['reload'])) {
 }
 $i = 0; // counter
 $url = $_COOKIE['feed']; // url to parse
-$rss = simplexml_load_file($url); // XML parser
+$rss = simplexml_load_file($url);
+$numb = count($rss->channel->item); // XML parser
+if (isset($_POST['five'])){
+  $numb=5;
+}
+else if (isset($_POST['ten'])){
+  $numb=10;
+}
+else{
+  $numb = count($rss->channel->item);
+}
 
 // // RSS items loop
 // foreach ($rss->channel->item as $item) {

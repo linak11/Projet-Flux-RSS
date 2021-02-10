@@ -27,35 +27,6 @@ require "controllers/index_controller.php";
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
     }
-
-    function myFunction() {
-      var element = document.body;
-      element.classList.toggle("dark-mode");
-    }
-
-    function retheme() {
-      var cc = document.body.className;
-      if (cc.indexOf("darktheme") > -1) {
-        document.body.className = cc.replace("darktheme", "");
-        if (opener) {
-          opener.document.body.className = cc.replace("darktheme", "");
-        }
-        localStorage.setItem("preferredmode", "light");
-      } else {
-        document.body.className += " darktheme";
-        if (opener) {
-          opener.document.body.className += " darktheme";
-        }
-        localStorage.setItem("preferredmode", "dark");
-      }
-    }
-    (
-      function setThemeMode() {
-        var x = localStorage.getItem("preferredmode");
-        if (x == "dark") {
-          document.body.className += " darktheme";
-        }
-      })();
   </script>
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
@@ -87,14 +58,10 @@ require "controllers/index_controller.php";
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <form action="index.php" method="POST">
-        <select name="numb" id="numb">
-          <option value="10">10</option>
-          <option value="5">5</option>
-          <option value="all">all</option>
-        </select>
-        <input type="submit" name="reload" value="Valider" />
+          <input type="submit" id="ten" name="ten" value="10"/>
+          <input type="submit" id="five" name ="five" value="5"/>
+          <input type="submit" id="all" name="all" value="all"/>
       </form>
-        <a class='fa fa-adjust' href='javascript:void(0);' onclick='retheme()' title='Change Theme'>Mode Nuit</a>
       <a href="#">Thème Jour 2</a>
       <a href="#">Thème Nuit</a>
     </div>
@@ -111,60 +78,16 @@ require "controllers/index_controller.php";
     if (!isset($_COOKIE['feed'])) {
       $feed = 'https://www.01net.com/rss/info/flux-rss/flux-toutes-les-actualites/';
       $rss = simplexml_load_file($feed);
-      foreach ($rss->channel->item as $item) {
-    ?>
-        <div id="newscard" class="card cardstyle">
-          <div class="card-body">
-            <h5 class="card-title"><b><?= $item->title ?></b></h5>
-            <p class="card-title"><b><?= $item->pubDate ?></b></p>
-            <p class="card-text"><?= strip_tags($item->description) ?></p>
-
-            <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-              + de détails
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade modalstyle" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"><?= $item->title ?></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
-
-                  <div class="modal-body">
-                    <?= strip_tags(strip_tags($item->description)) ?>
-                    <img class="img-fluid" src=<?= $item->enclosure['url'] ?> />
-                    <a href=<?= $item->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
-
-                  </div>
-                  <div class="modal-footer">
-
-                    <button type="button" class="btn btn-secondary retour" data-bs-dismiss="modal">Retour</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    <?php }
-    } ?>
-    <!-- affichage 5 cards -->
-    <?php
-    if (isset($_POST['numb'])) {
-      setcookie('numb', $_POST['numb'], time() + 3600);
     }
-    if ($_COOKIE['numb'] == "5") {
-      $NUMITEMS = 5;
-      $count = 0;
-      foreach ($rss->channel->item as $item) {
+      $i=0;
+      while ($i<$numb) {
     ?>
+    <div class="col-sm-5 my-3">
         <div id="newscard" class="card cardstyle">
           <div class="card-body">
-            <h5 class="card-title"><b><?= $item->title ?></b></h5>
-            <p class="card-title"><b><?= $item->pubDate ?></b></p>
-            <p class="card-text"><?= strip_tags($item->description) ?></p>
+            <h5 class="card-title"><b><?= $rss->channel->item[$i]->title ?></b></h5>
+            <p class="card-title"><b><?= $rss->channel->pubDate ?></b></p>
+            <p class="card-text"><?= strip_tags($rss->channel->description) ?></p>
 
             <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
               + de détails
@@ -175,15 +98,15 @@ require "controllers/index_controller.php";
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"><?= $item->title ?></h5>
+                    <h5 class="modal-title" id="staticBackdropLabel"><?= $rss[$i]->channel->item[$i]->title ?></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
+                  <p class="card-title mx-3"><b><?= $rss->channel->pubDate ?></b></p>
 
                   <div class="modal-body">
-                    <?= strip_tags(strip_tags($item->description)) ?>
-                    <img class="img-fluid" src=<?= $item->enclosure['url'] ?> />
-                    <a href=<?= $item->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
+                    <?= strip_tags(strip_tags($rss->channel->description)) ?>
+                    <img class="img-fluid" src=<?= $rss->channel->item[$i]->enclosure['url'] ?> />
+                    <a href=<?= $rss->channel->item->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
 
                   </div>
                   <div class="modal-footer">
@@ -195,102 +118,9 @@ require "controllers/index_controller.php";
             </div>
           </div>
         </div>
-    <?php if (++$count >= $NUMITEMS) break;
-      }
-    } ?>
-    <!-- affichage 10 cards -->
-    <?php
-    if (isset($_POST['numb'])) {
-      setcookie('numb', $_POST['numb'], time() + 3600);
-    }
-    if ($_COOKIE['numb'] == "10") {
-      $NUMITEMS = 10;
-      $count = 0;
-      foreach ($rss->channel->item as $item) {
-    ?>
-        <div id="newscard" class="card cardstyle">
-          <div class="card-body">
-            <h5 class="card-title"><b><?= $item->title ?></b></h5>
-            <p class="card-title"><b><?= $item->pubDate ?></b></p>
-            <p class="card-text"><?= strip_tags($item->description) ?></p>
-
-            <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-              + de détails
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade modalstyle" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"><?= $item->title ?></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
-
-                  <div class="modal-body">
-                    <?= strip_tags(strip_tags($item->description)) ?>
-                    <img class="img-fluid" src=<?= $item->enclosure['url'] ?> />
-                    <a href=<?= $item->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
-
-                  </div>
-                  <div class="modal-footer">
-
-                    <button type="button" class="btn btn-secondary retour" data-bs-dismiss="modal">Retour</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-    <?php if (++$count >= $NUMITEMS) break;
-      }
-    } ?>
-    <!-- affichage all cards-->
-    <?php
-    if (isset($_POST['numb'])) {
-      setcookie('numb', $_POST['numb'], time() + 3600);
-    }
-    if ($_COOKIE['numb'] == "all") {
-      foreach ($rss->channel->item as $item) {
-    ?>
-        <div id="newscard" class="card cardstyle">
-          <div class="card-body">
-            <h5 class="card-title"><b><?= $item->title ?></b></h5>
-            <p class="card-title"><b><?= $item->pubDate ?></b></p>
-            <p class="card-text"><?= strip_tags($item->description) ?></p>
-
-            <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-              + de détails
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade modalstyle" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"><?= $item->title ?></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
-
-                  <div class="modal-body">
-                    <?= strip_tags(strip_tags($item->description)) ?>
-                    <img class="img-fluid" src=<?= $item->enclosure['url'] ?> />
-                    <a href=<?= $item->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
-
-                  </div>
-                  <div class="modal-footer">
-
-                    <button type="button" class="btn btn-secondary retour" data-bs-dismiss="modal">Retour</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    <?php }
-    } ?>
+    <?php $i++;}
+     ?>
 
     <footer>
       <a href="mentions.html" class="mentions text-white">Mentions Légales</a>
