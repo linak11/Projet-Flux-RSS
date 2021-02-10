@@ -1,5 +1,4 @@
 <?php
-session_start();
 require "controllers/index_controller.php";
 ?>
 <!DOCTYPE html>
@@ -14,6 +13,7 @@ require "controllers/index_controller.php";
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 </head>
@@ -30,15 +30,12 @@ require "controllers/index_controller.php";
   </script>
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="Logo du site"></a>
+      <a class="navbar-brand" href="index.php"><img src="assets/img/logo.png" alt="Logo du site"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-          </li>
           <li class="nav-item">
             <form action="index.php" class="nav-link" method="POST">
               <input type="submit" class="cardstyle" name="actu" value="actualites" />
@@ -50,20 +47,34 @@ require "controllers/index_controller.php";
           </li>
 
         </ul>
+        <div class="social-menu d-flex">
+  <ul>
+    <li><a href=""><i class="fa fa-facebook"></i></a></li>
+    <li><a href=""><i class="fa fa-twitter"></i></a></li>
+    <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+  </ul>
+  </div>
         <form class="d-flex my-3">
-          <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; options</span>
+          <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img class="img-fluid settings"src="/assets/img/settings.png"/>&#9776; Paramètres</span>
         </form>
-      </div>
+      
     </div>
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <form action="index.php" method="POST">
-          <input type="submit" id="ten" name="ten" value="10"/>
-          <input type="submit" id="five" name ="five" value="5"/>
-          <input type="submit" id="all" name="all" value="all"/>
+        <label class="d-flex justify-content-center"><b>Nombre d'articles à afficher</b></label><br>
+        <div class="d-flex justify-content-center">
+         <input class="mx-2" type="submit" id="five" name ="five" value="5"/>
+          <input class="mx-2"type="submit" id="ten" name="ten" value="10"/>
+        <input class="mx-2" type="submit" id="all" name="all" value="Tout"/>  
+      </div>
       </form>
-      <a href="#">Thème Jour 2</a>
+      
+      <span>
+      <a href="#">Thème Jour</a>
       <a href="#">Thème Nuit</a>
+      <a href="#">Thème 3</a>
+  </span>
     </div>
     <!-- actualites -->
   </nav>
@@ -124,6 +135,7 @@ require "controllers/index_controller.php";
 
     <footer>
       <a href="mentions.html" class="mentions text-white">Mentions Légales</a>
+ 
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
