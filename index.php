@@ -18,7 +18,7 @@ require "controllers/index_controller.php";
 
 </head>
 
-<body class="container-fluid">
+<body class="container-fluid m-0 p-0">
   <script>
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
@@ -38,11 +38,11 @@ require "controllers/index_controller.php";
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <form action="index.php" class="nav-link" method="POST">
-              <input type="submit" class="cardstyle" name="actu" value="actualites" />
-              <input type="submit" class="cardstyle" name="techno" value="Technologies" />
-              <input type="submit" class="cardstyle" name="buzz" value="Buzz Société" />
-              <input type="submit" class="cardstyle" name="jeux" value="Jeux Vidéos" />
-              <input type="submit" class="cardstyle" name="politics" value="Politiques" />
+              <input type="submit" class="btn btn-rounded btn-md details" name="actu" value="Actualites" />
+              <input type="submit" class="btn btn-rounded btn-md details" name="techno" value="Technologies" />
+              <input type="submit" class="btn btn-rounded btn-md details" name="buzz" value="Buzz Société" />
+              <input type="submit" class="btn btn-rounded btn-md details" name="jeux" value="Jeux Vidéos" />
+              <input type="submit" class="btn btn-rounded btn-md details" name="politics" value="Politiques" />
             </form>
           </li>
 
@@ -55,7 +55,7 @@ require "controllers/index_controller.php";
   </ul>
   </div>
         <form class="d-flex my-3">
-          <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img class="img-fluid settings"src="/assets/img/settings.png"/>&#9776; Paramètres</span>
+          <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img class="img-fluid settings"src="assets/img/settings.png"/></span>
         </form>
       
     </div>
@@ -64,9 +64,9 @@ require "controllers/index_controller.php";
       <form action="index.php" method="POST">
         <label class="d-flex justify-content-center"><b>Nombre d'articles à afficher</b></label><br>
         <div class="d-flex justify-content-center">
-         <input class="mx-2" type="submit" id="five" name ="five" value="5"/>
-          <input class="mx-2"type="submit" id="ten" name="ten" value="10"/>
-        <input class="mx-2" type="submit" id="all" name="all" value="Tout"/>  
+         <input class="mx-2 btn btn-rounded btn-md details" type="submit" id="five" name ="five" value="5"/>
+          <input class="mx-2 btn btn-rounded btn-md details"type="submit" id="ten" name="ten" value="10"/>
+        <input class="mx-2 btn btn-rounded btn-md details" type="submit" id="all" name="all" value="Tout"/>  
       </div>
       </form>
       
@@ -79,11 +79,10 @@ require "controllers/index_controller.php";
     <!-- actualites -->
   </nav>
 
-  <div class="d-flex justify-content-center mt-2">
+  <div class="d-flex align-items-center justify-content-center mt-2">
     <img src="assets/img/title.png" class="animate__animated animate__bounce " id="f" />
   </div>
-  <div class="row">
-    <div class="col-sm-2"></div>
+  <div class="d-flex justify-content-center row p-0 g-0">
     <!-- affichage cards de base -->
     <?php
     if (!isset($_COOKIE['feed'])) {
