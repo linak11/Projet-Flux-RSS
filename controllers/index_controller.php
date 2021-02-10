@@ -7,6 +7,8 @@ $links = array(
   'https://www.01net.com/rss/jeux-video/',
   'https://www.01net.com/rss/actualites/politique-droits/',
 );
+$feed = 'https://www.01net.com/rss/info/flux-rss/flux-toutes-les-actualites/';
+setcookie('feed', $feed, time() + 3600);
 //affichage de base
 if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['actu'])) {
   $feed = $links[0];

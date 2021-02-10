@@ -18,7 +18,7 @@ require "controllers/index_controller.php";
 
 </head>
 
-<body class="container-fluid m-0 p-0">
+<body class="container-fluid m-0 p-0 bg-dark">
   <script>
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
@@ -27,6 +27,26 @@ require "controllers/index_controller.php";
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
     }
+
+    function retheme() {
+  var cc = document.body.className;
+  if (cc.indexOf("darktheme") > -1) {
+    document.body.className = cc.replace("darktheme", "");
+    if (opener) {opener.document.body.className = cc.replace("darktheme", "");}
+    localStorage.setItem("preferredmode", "light");
+  } else {
+    document.body.className += " darktheme";
+    if (opener) {opener.document.body.className += " darktheme";}
+    localStorage.setItem("preferredmode", "dark");
+  }
+}
+(
+function setThemeMode() {
+  var x = localStorage.getItem("preferredmode");
+  if (x == "dark") {
+    document.body.className += " darktheme";
+  }
+})();
   </script>
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
@@ -48,35 +68,35 @@ require "controllers/index_controller.php";
 
         </ul>
         <div class="social-menu d-flex">
-  <ul>
-    <li><a href=""><i class="fa fa-facebook"></i></a></li>
-    <li><a href=""><i class="fa fa-twitter"></i></a></li>
-    <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-  </ul>
-  </div>
+          <ul>
+            <li><a href=""><i class="fa fa-facebook"></i></a></li>
+            <li><a href=""><i class="fa fa-twitter"></i></a></li>
+            <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+          </ul>
+        </div>
         <form class="d-flex my-3">
-          <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img class="img-fluid settings"src="assets/img/settings.png"/></span>
+          <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img class="img-fluid settings" src="assets/img/settings.png" /></span>
         </form>
-      
-    </div>
-    <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <form action="index.php" method="POST">
-        <label class="d-flex justify-content-center"><b>Nombre d'articles à afficher</b></label><br>
-        <div class="d-flex justify-content-center">
-         <input class="mx-2 btn btn-rounded btn-md details" type="submit" id="five" name ="five" value="5"/>
-          <input class="mx-2 btn btn-rounded btn-md details"type="submit" id="ten" name="ten" value="10"/>
-        <input class="mx-2 btn btn-rounded btn-md details" type="submit" id="all" name="all" value="Tout"/>  
+
       </div>
-      </form>
-      
-      <span>
-      <a href="#">Thème Jour</a>
-      <a href="#">Thème Nuit</a>
-      <a href="#">Thème 3</a>
-  </span>
-    </div>
-    <!-- actualites -->
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <form action="index.php" method="POST">
+          <label class="d-flex justify-content-center"><b>Nombre d'articles à afficher</b></label><br>
+          <div class="d-flex justify-content-center">
+            <input class="mx-2 btn btn-rounded btn-md details" type="submit" id="five" name="five" value="5" />
+            <input class="mx-2 btn btn-rounded btn-md details" type="submit" id="ten" name="ten" value="10" />
+            <input class="mx-2 btn btn-rounded btn-md details" type="submit" id="all" name="all" value="Tout" />
+          </div>
+        </form>
+
+        <span>
+          <a href='javascript:void(0);' onclick='retheme()'>Switch Jour/Nuit</a>
+          <a href="#">Thème Nuit</a>
+          <a href="#">Thème 3</a>
+        </span>
+      </div>
+      <!-- actualites -->
   </nav>
 
   <div class="d-flex align-items-center justify-content-center mt-2">
@@ -87,24 +107,25 @@ require "controllers/index_controller.php";
     <?php
     if (!isset($_COOKIE['feed'])) {
       $feed = 'https://www.01net.com/rss/info/flux-rss/flux-toutes-les-actualites/';
+      setcookie('feed', $feed, time() + 3600);
       $rss = simplexml_load_file($feed);
     }
-      $i=0;
-      while ($i<$numb) {
+    $i = 0;
+    while ($i < $numb) {
     ?>
-    <div class="col-sm-5 my-3">
+      <div class="col-sm-5 my-3">
         <div id="newscard" class="card cardstyle">
           <div class="card-body">
             <h5 class="card-title"><b><?= $rss->channel->item[$i]->title ?></b></h5>
             <p class="card-title"><b><?= $rss->channel->item[$i]->pubDate ?></b></p>
             <p class="card-text"><?= strip_tags($rss->channel->item[$i]->description) ?></p>
 
-            <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop-<?=$i?>">
+            <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop-<?= $i ?>">
               + de détails
             </button>
 
             <!-- Modal -->
-            <div class="modal fade modalstyle" id="staticBackdrop-<?=$i?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal fade modalstyle" id="staticBackdrop-<?= $i ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -128,13 +149,14 @@ require "controllers/index_controller.php";
             </div>
           </div>
         </div>
-        </div>
-    <?php $i++;}
-     ?>
+      </div>
+    <?php $i++;
+    }
+    ?>
 
     <footer>
       <a href="mentions.html" class="mentions text-white">Mentions Légales</a>
- 
+
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
