@@ -8,38 +8,33 @@ $links = array(
   'https://www.01net.com/rss/actualites/politique-droits/',
 );
 $feed = 'https://www.01net.com/rss/info/flux-rss/flux-toutes-les-actualites/';
-setcookie('feed', $feed, time() + 3600);
+$_SESSION["feed"] = $feed;
 //affichage de base
 if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['actu'])) {
   $feed = $links[0];
-  // $_SESSION["feed"] = $feed;
-  setcookie('feed', $feed, time() + 3600);
+   $_SESSION["feed"] = $feed;
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['techno'])) {
   $feed = $links[1];
-  // $_SESSION["feed"] = $feed;
-  setcookie('feed', $feed, time() + 3600);
+  $_SESSION["feed"] = $feed;
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['buzz'])) {
   $feed = $links[2];
-  // $_SESSION["feed"] = $feed;
-  setcookie('feed', $feed, time() + 3600);
+  $_SESSION["feed"] = $feed;
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['jeux'])) {
   $feed = $links[3];
-  // $_SESSION["feed"] = $feed;
-  setcookie('feed', $feed, time() + 3600);
+  $_SESSION["feed"] = $feed;
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['politics'])) {
   $feed = $links[4];
-  // $_SESSION["feed"] = $feed;
-  setcookie('feed', $feed, time() + 3600);
+  $_SESSION["feed"] = $feed;
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['reload'])) {
  header('Location:index.php');
 }
 $i = 0; // counter
-$url = $_COOKIE['feed']; // url to parse
+$url = $_SESSION['feed']; // url to parse
 $rss = simplexml_load_file($url);
 $numb = count($rss->channel->item); // XML parser
 if (isset($_POST['five'])){

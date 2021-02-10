@@ -18,7 +18,7 @@ require "controllers/index_controller.php";
 
 </head>
 
-<body class="container-fluid m-0 p-0 bg-dark">
+<body class="container-fluid m-0 p-0">
   <script>
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
@@ -92,8 +92,7 @@ function setThemeMode() {
 
         <span>
           <a href='javascript:void(0);' onclick='retheme()'>Switch Jour/Nuit</a>
-          <a href="#">Thème Nuit</a>
-          <a href="#">Thème 3</a>
+          <a href='javascript:void(0);' onclick=''>Thème alternatif</a>
         </span>
       </div>
       <!-- actualites -->
@@ -105,9 +104,8 @@ function setThemeMode() {
   <div class="d-flex justify-content-center row p-0 g-0">
     <!-- affichage cards de base -->
     <?php
-    if (!isset($_COOKIE['feed'])) {
+    if (!isset($_SESSION['feed'])) {
       $feed = 'https://www.01net.com/rss/info/flux-rss/flux-toutes-les-actualites/';
-      setcookie('feed', $feed, time() + 3600);
       $rss = simplexml_load_file($feed);
     }
     $i = 0;
@@ -135,7 +133,7 @@ function setThemeMode() {
                   <p class="card-title mx-3"><b><?= $rss->channel->item[$i]->pubDate ?></b></p>
 
                   <div class="modal-body">
-                    <?= strip_tags(strip_tags($rss->channel->$item[$i]->description)) ?>
+                    <?= strip_tags(strip_tags($rss->channel->item[$i]->description)) ?>
                     <img class="img-fluid" src=<?= $rss->channel->item[$i]->enclosure['url'] ?> />
                     <a href=<?= $rss->channel->item[$i]->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
 

@@ -177,25 +177,22 @@ footer {
   position: absolute;
 }
 body.darktheme {
-  color: #fff;
   background-color: #000;
 }
 body.darktheme .div {
-  color: #fff;
   background-color: #000!important;
 }
 body.darktheme .lin-element-name a {
-  color: #fff;
   background-color: #000;
 }
 body.darktheme #cardstyle #card {
-  color: #fff;
   background-color: #000!important;
 }
 body.darktheme your-element-name ul li a {
   color: #fff;
   background-color: #000;
 }
+
 .social-menu ul {
   position: absolute;
   top: 50%;
