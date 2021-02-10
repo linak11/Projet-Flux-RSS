@@ -1,125 +1,198 @@
-
-  @font-face {
-    font-family: absender;
-    src: url("/assets/fonts/absender.ttf");
-  }
-  @font-face {
-    font-family:Champagne;
-    src: url("/assets/fonts/Champagne.ttf");
-  }
-  body{
-    font-family: Champagne;
-    src: url("/assets/fonts/Champagne.ttf");
-    color:#023436;
-    width:100%;
-  }
-  .navbar{
-    box-shadow: 0 2px 5px 0 black;
-    width:100%;
-  }
-
-.navbar{
-    background-color: #ef9b0f;
-    color: white;
-    font-size: 1.2em;
+@font-face {
+  font-family: absender;
+  src: url("/assets/fonts/absender.ttf");
 }
-.brand{
+@font-face {
+  font-family: Champagne;
+  src: url("/assets/fonts/Champagne.ttf");
+}
+body {
+  font-family: Champagne;
+  src: url("/assets/fonts/Champagne.ttf");
+  color: #023436;
+  width: 100%;
+}
+.navbar {
+  box-shadow: 0 2px 5px 0 black;
+  width: 100%;
+}
+
+.navbar {
+  background-color: #ef9b0f;
+  color: white;
+  font-size: 1.2em;
+}
+.brand {
   font-family: absender;
   src: url("/assets/fonts/absender.ttf");
   font-size: 2em;
-  color:#037971;
+  color: #037971;
 }
 
-.title{
-font-family: absender;
-src: url("/assets/fonts/absender.ttf");
-font-size: 4.5em;
-color:#037971;
+.title {
+  font-family: absender;
+  src: url("/assets/fonts/absender.ttf");
+  font-size: 4.5em;
+  color: #037971;
 }
 
-nav a{
-color:white;
-font-weight: bold;
-letter-spacing: 0.7px;
-}
-a:hover{
-  background-color: #037971;
-  color:white;
-  animation: pulse 0.5s;
-}
-
-.button{
-  background-color: #037971;
-  color:white;
+nav a {
+  color: white;
   font-weight: bold;
   letter-spacing: 0.7px;
 }
-.button:hover{
-  background-color:#cbd2d0;
-  color:black;
+a:hover {
+  background-color: #037971;
+  color: white;
+  animation: pulse 0.5s;
+}
+
+.button {
+  background-color: #037971;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.7px;
+}
+.button:hover {
+  background-color: #cbd2d0;
+  color: black;
   animation: headShake 0.5s;
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
   .navbar li {
-      margin-left : 1em;
-      margin-right : 1em;
+    margin-left: 1em;
+    margin-right: 1em;
   }
 }
-.case{
+.case {
   width: 11em;
   border: 2px solid #037971;
 }
 @keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
 }
 
-.cardstyle{
+.cardstyle {
   border: 2px solid #037971;
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
   box-shadow: 0 2px 5px 0 black;
 }
 
-.details, .retour, .article{
+.details,
+.retour,
+.article {
   background-color: #037971;
   box-shadow: 0 6px 6px 0 #424242;
-  color:white;
+  color: white;
   font-weight: bold;
 }
-.details:hover, .article:hover, .retour:hover{
-  background-color:white;
-  color:#037971;
+.details:hover,
+.article:hover,
+.retour:hover {
+  background-color: white;
+  color: #037971;
 }
 
-.linksubject{
-  text-decoration:underline;
+.linksubject {
+  text-decoration: underline;
   font-size: 1.5em;
   font-weight: bold;
   color: #023436;
 }
-.linksubject:hover{
+.linksubject:hover {
   background-color: transparent;
   color: white;
-
 }
 
-footer{
+footer {
   height: 10em;
-  background-color:#424242;
+  background-color: #424242;
 }
-.mentions1{
+.mentions1 {
   font-family: Champagne;
   src: url("/assets/fonts/Champagne.ttf");
   font-weight: bold;
   text-decoration: none;
 }
-.btn3{
+.btn3 {
   border: 4px solid #037971;
   box-shadow: 0 6px 6px 0 #424242;
-  font-size:1em;
+  font-size: 1em;
   font-weight: bold;
 }
-.btn3:hover{
-  color:white;
+.btn3:hover {
+  color: white;
+}
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+#theme-switch {
+  font-size: 20px;
+  position: absolute;
+}
+body.darktheme {
+  color: #fff;
+  background-color: #000;
+}
+body.darktheme .div {
+  color: #fff;
+  background-color: #000!important;
+}
+body.darktheme .lin-element-name a {
+  color: #fff;
+  background-color: #000;
+}
+body.darktheme #cardstyle #card {
+  color: #fff;
+  background-color: #000!important;
+}
+body.darktheme your-element-name ul li a {
+  color: #fff;
+  background-color: #000;
 }

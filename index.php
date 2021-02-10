@@ -19,6 +19,44 @@ require "controllers/index_controller.php";
 </head>
 
 <body class="container-fluid">
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+
+    function myFunction() {
+      var element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+
+    function retheme() {
+      var cc = document.body.className;
+      if (cc.indexOf("darktheme") > -1) {
+        document.body.className = cc.replace("darktheme", "");
+        if (opener) {
+          opener.document.body.className = cc.replace("darktheme", "");
+        }
+        localStorage.setItem("preferredmode", "light");
+      } else {
+        document.body.className += " darktheme";
+        if (opener) {
+          opener.document.body.className += " darktheme";
+        }
+        localStorage.setItem("preferredmode", "dark");
+      }
+    }
+    (
+      function setThemeMode() {
+        var x = localStorage.getItem("preferredmode");
+        if (x == "dark") {
+          document.body.className += " darktheme";
+        }
+      })();
+  </script>
   <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="Logo du site"></a>
@@ -31,8 +69,7 @@ require "controllers/index_controller.php";
             <a class="nav-link active" aria-current="page" href="#">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" name="actu" href="#">Tweeter feeds</a>
-            <form action="index.php" method="POST">
+            <form action="index.php" class="nav-link" method="POST">
               <input type="submit" class="cardstyle" name="actu" value="actualites" />
               <input type="submit" class="cardstyle" name="techno" value="Technologies" />
               <input type="submit" class="cardstyle" name="buzz" value="Buzz Société" />
@@ -40,26 +77,28 @@ require "controllers/index_controller.php";
               <input type="submit" class="cardstyle" name="politics" value="Politiques" />
             </form>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Newsletters</a>
-          </li>
 
         </ul>
         <form class="d-flex my-3">
-          <input class="form-control me-2 ml-1 case" type="search" placeholder="Rechercher sur le site" aria-label="Search">
-          <button class="btn btn-outline-success button ms-3 me-3 " type="submit">Rechercher</button>
+          <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; options</span>
         </form>
       </div>
     </div>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <form action="index.php" method="POST">
+        <select name="numb" id="numb">
+          <option value="10">10</option>
+          <option value="5">5</option>
+          <option value="all">all</option>
+        </select>
+        <input type="submit" name="reload" value="Valider" />
+      </form>
+        <a class='fa fa-adjust' href='javascript:void(0);' onclick='retheme()' title='Change Theme'>Mode Nuit</a>
+      <a href="#">Thème Jour 2</a>
+      <a href="#">Thème Nuit</a>
+    </div>
     <!-- actualites -->
-            <form action="index.php" method="POST">
-            <select name="numb" id="numb">
-                <option value="10">10</option>
-                <option value="5">5</option>
-                <option value="all">all</option>
-              </select>
-              <input type="submit" name="reload" value="Valider" />
-            </form>
   </nav>
 
   <div class="d-flex justify-content-center mt-2">
@@ -74,11 +113,11 @@ require "controllers/index_controller.php";
       $rss = simplexml_load_file($feed);
       foreach ($rss->channel->item as $item) {
     ?>
-        <div class="card cardstyle">
+        <div id="newscard" class="card cardstyle">
           <div class="card-body">
             <h5 class="card-title"><b><?= $item->title ?></b></h5>
             <p class="card-title"><b><?= $item->pubDate ?></b></p>
-            <p class="card-text"><?= substr($item->description, 0, $max_length) . "..." ?></p>
+            <p class="card-text"><?= strip_tags($item->description) ?></p>
 
             <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
               + de détails
@@ -95,7 +134,7 @@ require "controllers/index_controller.php";
                   <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
 
                   <div class="modal-body">
-                    <?= strip_tags($item->description) ?>
+                    <?= strip_tags(strip_tags($item->description)) ?>
                     <img class="img-fluid" src=<?= $item->enclosure['url'] ?> />
                     <a href=<?= $item->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
 
@@ -121,11 +160,11 @@ require "controllers/index_controller.php";
       $count = 0;
       foreach ($rss->channel->item as $item) {
     ?>
-        <div class="card cardstyle">
+        <div id="newscard" class="card cardstyle">
           <div class="card-body">
             <h5 class="card-title"><b><?= $item->title ?></b></h5>
             <p class="card-title"><b><?= $item->pubDate ?></b></p>
-            <p class="card-text"><?= substr($item->description, 0, $max_length) . "..." ?></p>
+            <p class="card-text"><?= strip_tags($item->description) ?></p>
 
             <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
               + de détails
@@ -142,7 +181,7 @@ require "controllers/index_controller.php";
                   <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
 
                   <div class="modal-body">
-                    <?= strip_tags($item->description) ?>
+                    <?= strip_tags(strip_tags($item->description)) ?>
                     <img class="img-fluid" src=<?= $item->enclosure['url'] ?> />
                     <a href=<?= $item->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
 
@@ -169,11 +208,11 @@ require "controllers/index_controller.php";
       $count = 0;
       foreach ($rss->channel->item as $item) {
     ?>
-        <div class="card cardstyle">
+        <div id="newscard" class="card cardstyle">
           <div class="card-body">
             <h5 class="card-title"><b><?= $item->title ?></b></h5>
             <p class="card-title"><b><?= $item->pubDate ?></b></p>
-            <p class="card-text"><?= substr($item->description, 0, $max_length) . "..." ?></p>
+            <p class="card-text"><?= strip_tags($item->description) ?></p>
 
             <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
               + de détails
@@ -190,7 +229,7 @@ require "controllers/index_controller.php";
                   <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
 
                   <div class="modal-body">
-                    <?= strip_tags($item->description) ?>
+                    <?= strip_tags(strip_tags($item->description)) ?>
                     <img class="img-fluid" src=<?= $item->enclosure['url'] ?> />
                     <a href=<?= $item->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
 
@@ -215,11 +254,11 @@ require "controllers/index_controller.php";
     if ($_COOKIE['numb'] == "all") {
       foreach ($rss->channel->item as $item) {
     ?>
-        <div class="card cardstyle">
+        <div id="newscard" class="card cardstyle">
           <div class="card-body">
             <h5 class="card-title"><b><?= $item->title ?></b></h5>
             <p class="card-title"><b><?= $item->pubDate ?></b></p>
-            <p class="card-text"><?= substr($item->description, 0, $max_length) . "..." ?></p>
+            <p class="card-text"><?= strip_tags($item->description) ?></p>
 
             <button type="button" class="btn btn-rounded btn-md details" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
               + de détails
@@ -236,7 +275,7 @@ require "controllers/index_controller.php";
                   <p class="card-title mx-3"><b><?= $item->pubDate ?></b></p>
 
                   <div class="modal-body">
-                    <?= strip_tags($item->description) ?>
+                    <?= strip_tags(strip_tags($item->description)) ?>
                     <img class="img-fluid" src=<?= $item->enclosure['url'] ?> />
                     <a href=<?= $item->link ?> class="btn btn-rounded btn-md d-flex justify-content-center btn3" target="_blank">Accéder à l'article</a>
 
@@ -252,10 +291,10 @@ require "controllers/index_controller.php";
         </div>
     <?php }
     } ?>
-  
-<footer>
-  <a href="mentions.html" class="mentions text-white">Mentions Légales</a>
-</footer>
+
+    <footer>
+      <a href="mentions.html" class="mentions text-white">Mentions Légales</a>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
