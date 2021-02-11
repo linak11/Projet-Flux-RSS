@@ -19,6 +19,7 @@ require "controllers/index_controller.php";
 </head>
 
 <body class="container-fluid m-0 p-0">
+ 
   <script>
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
@@ -97,7 +98,12 @@ function setThemeMode() {
       </div>
       <!-- actualites -->
   </nav>
-
+  <div class="header">  
+  <div class="d-grid gap-2 col-6 mx-auto">
+  <button class="btn btn-primary" type="button">Button</button>
+  
+</div>
+</div>
   <div class="d-flex align-items-center justify-content-center mt-2">
     <img src="assets/img/title.png" class="animate__animated animate__bounce " id="f" />
   </div>
@@ -111,7 +117,7 @@ function setThemeMode() {
     $i = 0;
     while ($i < $numb) {
     ?>
-      <div class="col-sm-5 my-3">
+      <div class="col-sm-7 my-3 mx-3">
         <div id="newscard" class="card cardstyle">
           <div class="card-body">
             <h5 class="card-title"><b><?= $rss->channel->item[$i]->title ?></b></h5>
@@ -127,7 +133,7 @@ function setThemeMode() {
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"><?= $rss[$i]->channel->item[$i]->title ?></h5>
+                    <h5 class="modal-title" id="staticBackdropLabel"><?= $rss->channel->item[$i]->title ?></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <p class="card-title mx-3"><b><?= $rss->channel->item[$i]->pubDate ?></b></p>
@@ -139,6 +145,33 @@ function setThemeMode() {
 
                   </div>
                   <div class="modal-footer">
+   <div class="container">              
+  <div class="row align-items-start">
+      <div class="col">
+      <h4>Partagez cet article</h3>
+<!-- Facebook -->
+       <a target="_blank" title="Facebook" href="https://www.facebook.com/sharer.php?u=https://tontonduweb.com/previews-warc/genieCivil/article1.html" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"><img src="/assets/img/iconrs/facebook_icon.png" alt="Facebook" /></a>
+<!-- //Facebook -->
+ 
+<!-- Twitter -->
+        <a target="_blank" title="Twitter" href="https://twitter.com/share?url=https://bit.ly/2sI7H3v" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"><img src="/assets/img/iconrs/twitter_icon.png" alt="Twitter" /></a>
+<!-- //Twitter -->
+ 
+<!-- Google + -->
+        <a target="_blank" title="Google +" href="https://plus.google.com/share?url=https://tontonduweb.com/previews-warc/genieCivil/article1.html" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img src="/assets/img/iconrs/gplus_icon.png" alt="Google Plus" /></a>
+<!-- //Google + -->
+ 
+<!-- Linkedin -->
+        <a target="_blank" title="Linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://tontonduweb.com/previews-warc/genieCivil/article1.html" rel="nofollow" onclick="javascript:window.open(this.href, '','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img src="/assets/img/iconrs/linkedin_icon.png" alt="Linkedin" /></a>
+<!-- //Linkedin -->
+ 
+<!-- Email -->
+        <a target="_blank" title="Envoyer par mail" href="mailto:?Subject=Regarde ça c'est cool !&amp;Body=regarde%20cet%20article%20c'est%20super !%20 https://tontonduweb.com/previews-warc/genieCivil/article1.html" rel="nofollow"><img src="/assets/img/iconrs/email_icon.png" alt="email" /></a>
+<!-- //Email -->
+</div>    
+</div>
+    </div>
+
 
                     <button type="button" class="btn btn-secondary retour" data-bs-dismiss="modal">Retour</button>
                   </div>
@@ -152,11 +185,56 @@ function setThemeMode() {
     }
     ?>
 
-    <footer>
-      <a href="mentions.html" class="mentions text-white">Mentions Légales</a>
+    <!-- Footer -->
+<footer class="text-center text-lg-start">
+  <!-- Grid container -->
+  <div class="d-flex align-items-center justify-content-center mt-2">
+    <img src="assets/img/title.png"/>
+  </div>
+  <div class="container p-4">
+    <!--Grid row-->
+    <div class="row">
+      <!--Grid column-->
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        
+        <h5 class="text-uppercase">Footer Content</h5>
 
-    </footer>
+        <p class="text-white">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+          molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+          voluptatem veniam, est atque cumque eum delectus sint!
+        </p>
+      </div>
+    
+      <!--Grid column-->
 
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+       
+
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a href="mentions.html" class="text-white mentions">Mentions Légales</a>
+          </li>
+         
+        </ul>
+      </div>
+      <!--Grid column-->
+
+     
+    </div>
+    <!--Grid row-->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3 text-white" style="background-color: rgba(0, 0, 0, 0.2)">
+    © 2021 Copyright:
+    <a class="text-white" href="index.php">www.fidz.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 

@@ -110,10 +110,6 @@ a:hover {
   color: white;
 }
 
-footer {
-  height: 10em;
-  background-color: #424242;
-}
 .mentions1 {
   font-family: Champagne;
   src: url("/assets/fonts/Champagne.ttf");
@@ -251,4 +247,21 @@ body.darktheme your-element-name ul li a {
 .settings{
   height:2em;
   width:2em;
+}
+.mentions{
+  font-size: 2em;
+}
+footer{
+  background-color:#424242;
+}
+.header {
+  background: #1B2030 url(/assets/img/header1.jpg)no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+ color: white;
+ padding: 2%;
+ box-sizing: content-box;
+ text-align: center;
+ height: 80vh;
+ margin-bottom: 2%;
 }
