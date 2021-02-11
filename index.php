@@ -67,14 +67,14 @@ require "controllers/index_controller.php";
       </div>
       <!-- actualites -->
   </nav>
-  <div class="header">  
-  <div class="d-grid gap-2 col-6 mx-auto">
-  <button class="btn btn-primary" type="button">Button</button>
-  
+  <div class="header d-flex align-items-center">  
+  <div class="d-grid gap-2 col-3 mx-auto">
+    
+  <a href="#article"><button class="btn bienvenue text-white" type="button">BIENVENUE</button></a>
 </div>
 </div>
   <div class="d-flex align-items-center justify-content-center mt-2">
-    <img src="assets/img/title.png" class="animate__animated animate__bounce " id="f" />
+    <img id="article"src="assets/img/title.png" class="animate__animated animate__bounce " id="f" />
   </div>
   <div class="d-flex justify-content-center row p-0 g-0">
     <!-- affichage cards de base -->
@@ -153,7 +153,6 @@ require "controllers/index_controller.php";
     <?php $i++;
     }
     ?>
-
     <!-- Footer -->
 <footer class="text-center text-lg-start">
   <!-- Grid container -->
@@ -166,19 +165,18 @@ require "controllers/index_controller.php";
       <!--Grid column-->
       <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
         
-        <h5 class="text-uppercase">Footer Content</h5>
+        <h5 class="text-uppercase text-white">Contact</h5>
 
         <p class="text-white">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-          molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
-          voluptatem veniam, est atque cumque eum delectus sint!
+          02.35.42.22.22
+          contactfidz@gmail.com
         </p>
       </div>
     
       <!--Grid column-->
 
       <!--Grid column-->
-      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+      <div class="col-lg-3 col-md-7 mb-4 mb-md-0">
        
 
         <ul class="list-unstyled mb-0">

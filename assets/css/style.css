@@ -86,7 +86,8 @@ a:hover {
 
 .details,
 .retour,
-.article {
+.article
+ {
   background-color: #037971;
   box-shadow: 0 6px 6px 0 #424242;
   color: white;
@@ -116,7 +117,7 @@ a:hover {
   font-weight: bold;
   text-decoration: none;
 }
-.btn3 {
+.btn3, {
   border: 4px solid #037971;
   box-shadow: 0 6px 6px 0 #424242;
   font-size: 1em;
@@ -264,4 +265,14 @@ footer{
  text-align: center;
  height: 80vh;
  margin-bottom: 2%;
+}
+
+.bienvenue{
+    background-color:#037971;
+  
+    color: white;
+    font-weight: bold;  
+}
+.bienvenue a{
+  text-decoration: none!important;
 }
