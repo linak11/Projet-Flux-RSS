@@ -19,41 +19,11 @@ require "controllers/index_controller.php";
 </head>
 
 <body class="container-fluid m-0 p-0">
- 
-  <script>
-    function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
-    }
-
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-    }
-
-    function retheme() {
-  var cc = document.body.className;
-  if (cc.indexOf("darktheme") > -1) {
-    document.body.className = cc.replace("darktheme", "");
-    if (opener) {opener.document.body.className = cc.replace("darktheme", "");}
-    localStorage.setItem("preferredmode", "light");
-  } else {
-    document.body.className += " darktheme";
-    if (opener) {opener.document.body.className += " darktheme";}
-    localStorage.setItem("preferredmode", "dark");
-  }
-}
-(
-function setThemeMode() {
-  var x = localStorage.getItem("preferredmode");
-  if (x == "dark") {
-    document.body.className += " darktheme";
-  }
-})();
-  </script>
-  <nav class="navbar navbar-expand-lg sticky-top">
+  <nav class="navbar navbar-expand-lg sticky-top container-fluid">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php"><img src="assets/img/logo.png" alt="Logo du site"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"><i class="fa fa-bars" aria-hidden="true"></i></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -93,7 +63,6 @@ function setThemeMode() {
 
         <span>
           <a href='javascript:void(0);' onclick='retheme()'>Switch Jour/Nuit</a>
-          <a href='javascript:void(0);' onclick=''>Thème alternatif</a>
         </span>
       </div>
       <!-- actualites -->
@@ -236,6 +205,7 @@ function setThemeMode() {
 </footer>
 <!-- Footer -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 

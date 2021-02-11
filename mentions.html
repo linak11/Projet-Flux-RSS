@@ -12,28 +12,32 @@
 <body>
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid" >
-              <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="Logo du site"></a>
+              <a class="navbar-brand" href="index.php"><img src="assets/img/logo.png" alt="Logo du site"></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" name="actu" href="#">Tweeter feeds</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Newsletters</a>
-                  </li>
-                
-                </ul>
-                <form class="d-flex my-3">
-                  <input class="form-control me-2 ml-1 case" type="search" placeholder="Rechercher sur le site" aria-label="Search">
-                  <button class="btn btn-outline-success button ms-3 me-3 " type="submit">Rechercher</button>
-                </form>
               </div>
+              <form class="d-flex my-3">
+                <span style="font-size:30px;cursor:pointer" onclick="openNav()"><img class="img-fluid settings" src="assets/img/settings.png" /></span>
+              </form>
+      
+            </div>
+            <div id="mySidenav" class="sidenav">
+              <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+              <form action="index.php" method="POST">
+                <label class="d-flex justify-content-center"><b>Nombre d'articles à afficher</b></label><br>
+                <div class="d-flex justify-content-center">
+                  <input class="mx-2 btn btn-rounded btn-md details" type="submit" id="five" name="five" value="5" />
+                  <input class="mx-2 btn btn-rounded btn-md details" type="submit" id="ten" name="ten" value="10" />
+                  <input class="mx-2 btn btn-rounded btn-md details" type="submit" id="all" name="all" value="Tout" />
+                </div>
+              </form>
+      
+              <span>
+                <a href='javascript:void(0);' onclick='retheme()'>Switch Jour/Nuit</a>
+              </span>
+            </div>
             </div>
           </nav>
     <div class="header-home">
@@ -110,6 +114,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script type="text/javascript" src="assets/js/AOS.js"></script>
+<script src="assets/js/main.js"></script>
 
 </body>    
 

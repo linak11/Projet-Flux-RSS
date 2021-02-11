@@ -255,7 +255,7 @@ footer{
   background-color:#424242;
 }
 .header {
-  background: #1B2030 url(/assets/img/header1.jpg)no-repeat;
+  background: #1B2030 url(../img/header1.jpg)no-repeat;
    background-size: cover;
    background-attachment: fixed;
  color: white;

@@ -77,12 +77,3 @@ else{
 //   }
 // }
 ?>
-<!-- Boutons premier feed
-  <form action="index_controller.php" method="POST">
-    <input type="submit" name="fiveItems" value="5 items" />
-    <input type="submit" name="tenItems" value="10 items" />
-    <input type="submit" name="unlItems" value="Toutes les Items" />
-  </form> -->
-<!-- Boutons choix de feed
-</body>
-</html> -->
